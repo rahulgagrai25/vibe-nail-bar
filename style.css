@@ -214,9 +214,7 @@ body {
   transition: 0.3s;
 }
 .btn-primary:hover {
-  background: var(
-    --primary-soft-rose
-  ); /* Adjusted to match the original hover color, assuming it was intended to be slightly different from the base soft-rose */
+  background: var(--secondary-pale-rose);
 }
 
 .services {
