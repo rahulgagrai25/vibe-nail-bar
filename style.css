@@ -217,10 +217,15 @@ body {
   background: var(--secondary-pale-rose);
 }
 
+.card img{
+  height: 60%;
+}
+
 .services {
-  padding: 60px 8%;
+  padding: 60px 10px;
   background: var(--secondary-light-beige);
   text-align: center;
+  overflow: hidden;
 }
 
 .services h1 {
@@ -245,8 +250,8 @@ body {
 /* Grid */
 .services-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
   padding: 0rem 2rem;
 }
 
