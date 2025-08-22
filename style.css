@@ -222,6 +222,11 @@ body {
   background: var(--secondary-light-beige);
   text-align: center;
   overflow: hidden;
+  background-image: 
+                radial-gradient(circle, rgba(200, 167, 150, 0.) 2px, transparent 2px),
+                radial-gradient(circle, rgba(200, 167, 150, 0.1) 1px, transparent 1px);
+            background-size: 40px 40px, 80px 80px;
+            background-position: 0 0, 40px 40px;
 }
 
 .services h1 {
@@ -628,6 +633,11 @@ body {
   width: auto;
   padding: 60px 20px;
   background: var(--primary-white);
+  background-image: 
+                radial-gradient(circle, rgba(200, 167, 150, 0.1) 2px, transparent 2px),
+                radial-gradient(circle, rgba(200, 167, 150, 0.1) 1px, transparent 1px);
+            background-size: 40px 40px, 80px 80px;
+            background-position: 0 0, 40px 40px;
 }
 
 .booking-wrapper {
@@ -899,7 +909,7 @@ svg {
 
 /* Responsive */
 
-@media (max-width: 1250px) {
+@media (max-width: 1285px) {
   .pink-card,
   .pink-card2 {
     display: none;
