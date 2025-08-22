@@ -216,11 +216,7 @@ body {
 .btn-primary:hover {
   background: var(--secondary-pale-rose);
 }
-
-.card img{
-  height: 60%;
-}
-
+/* Services Section */
 .services {
   padding: 60px 10px;
   background: var(--secondary-light-beige);
@@ -249,79 +245,35 @@ body {
 
 /* Grid */
 .services-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 14px;
+  width: 100vw;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  /* display: grid;
+  grid-template-columns: repeat(5, 1fr); */
+  gap: 30px;
   padding: 0rem 2rem;
 }
 
-.service-card {
-  background: var(--primary-white);
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  transition: 0.1s ease-in;
-  text-align: left;
-}
-
-.service-card:hover {
-  transform: translateY(-10px) !important;
-  box-shadow: 0px 1px 25px rgb(214, 214, 214);
-}
-
-.service-card img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-}
-
-.service-content {
-  padding: 25px;
-}
-
-.service-content .icon {
-  height: 40px;
-  width: 40px;
-  font-size: 1.5rem;
-  background: var(--secondary-light-pink);
-  color: var(--secondary-dark-rose);
-  border-radius: 50%;
-  display: inline-block;
-  align-self: center;
-  padding: 10px;
-  margin-bottom: 15px;
-}
-.icon svg {
-  height: 100%;
-  display: block;
-}
-
-.service-content h3 {
+.card p{
   font-family: Cormorant Garamond, serif;
   font-size: 20px;
-  font-weight: 800;
-  margin-bottom: 10px;
-  color: var(--primary-dark-brown);
-}
-
-.service-content p {
-  font-size: 14px;
-  font-family: "Inter", sans-serif;
-  color: var(--primary-dark-brown);
-  line-height: 1.25rem;
-  margin-bottom: 1rem;
-}
-
-.service-content a {
-  text-decoration: none;
-  font-family: "Inter", sans-serif;
-  color: var(--primary-soft-rose);
   font-weight: 500;
-  transition: color 0.3s;
+  font-style: italic;
 }
-.service-content a:hover {
-  color: var(--secondary-darker-rose);
+
+.window-card {
+  width: 200px;
+  height: 300px;
+  margin-bottom: 15px;
+  transition: 0.3s;
 }
+
+.window-card:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 0.75rem var(--secondary-social-icon-hover));
+}
+
 
 /* View More Button */
 .view-more {
@@ -332,7 +284,7 @@ body {
   text-decoration: none;
   background: var(--secondary-dark-rose);
   color: var(--primary-white);
-
+  margin-bottom: 20px;
   padding: 15px 20px;
   border-radius: 25px;
   transition: 0.3s;
@@ -344,6 +296,8 @@ body {
 /* History Section */
 
 .history {
+  height: 100vh;
+  width: auto;
   background: var(--primary-white);
   padding: 60px 10%;
   font-family: "Inter", sans-serif;
@@ -441,9 +395,8 @@ body {
   height: 300px;
   width: 300px;
   left: 750px;
-  bottom: -1450px;
+  bottom: -1360px;
   border-radius: 15px;
-
   background-color: var(--secondary-light-pink);
 }
 
@@ -452,7 +405,7 @@ body {
   height: 300px;
   width: 300px;
   left: 1090px;
-  bottom: -1120px;
+  bottom: -1020px;
   border-radius: 15px;
 
   background-color: var(--secondary-light-pink);
