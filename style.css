@@ -40,6 +40,11 @@
   box-sizing: border-box;
 }
 
+html, body {
+  overflow-x: hidden; /* Prevent horizontal scroll */
+  width: 100%;
+}
+
 body {
   font-family: "Segoe UI", sans-serif;
   background-color: var(--secondary-off-white);
@@ -250,12 +255,11 @@ body {
 
 /* Grid */
 .services-grid {
-  width: 100vw;
+  width: 100%;
   height: auto;
   display: flex;
   justify-content: center;
-  /* display: grid;
-  grid-template-columns: repeat(5, 1fr); */
+  flex-wrap: wrap;
   gap: 30px;
   padding: 0rem 2rem;
 }
@@ -301,7 +305,7 @@ body {
 /* History Section */
 
 .history {
-  height: 100vh;
+  height: auto;
   width: auto;
   background: var(--primary-white);
   padding: 60px 10%;
@@ -393,6 +397,8 @@ body {
 .history-image img {
   width: 100%;
   border-radius: 12px;
+  max-width: 100%;
+  height: auto;
 }
 
 .pink-card {
@@ -515,8 +521,8 @@ body {
 }
 
 .gallery img {
-  height: 600px;
-  width: 1500px;
+  max-width: 100%;
+  height: 700px;
   object-fit: cover;
 }
 
@@ -538,7 +544,7 @@ body {
 
 .gallery-slider {
   position: relative;
-  max-width: 1000px;
+  max-width: 100%;
   margin: auto;
   overflow: hidden;
   border-radius: 12px;
@@ -614,8 +620,8 @@ body {
 
 .dots span {
   cursor: pointer;
-  height: 12px;
-  width: 12px;
+  height: 8px;
+  width: 8px;
   margin: 0 5px;
   background-color: var(--neutral-light);
   border-radius: 50%;
@@ -629,7 +635,7 @@ body {
 /* Booking Section */
 
 .Booking {
-  height: 95vh;
+  height: auto;
   width: auto;
   padding: 60px 20px;
   background: var(--primary-white);
@@ -922,7 +928,14 @@ svg {
   }
 }
 
+/* Mobile Responsiveness */
 @media (max-width: 768px) {
+  /* Prevent horizontal scroll */
+  html, body {
+    overflow-x: hidden;
+    width: 100%;
+  }
+  
   /* Navbar */
   .navbar {
     padding: 18px 5%;
@@ -979,15 +992,36 @@ svg {
     font-size: 1rem;
   }
 
-  /* Services Section */
+  /* Services Section - Fixed for mobile */
   .services {
     padding: 40px 5%;
   }
 
   .services-grid {
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     padding: 0;
+  }
+
+  .window-card {
+    display: none; /* Hide window cards on mobile */
+  }
+
+  .card p {
+    display: block; /* Show only service names */
+    font-size: 18px;
+    padding: 12px 20px;
+    background-color: var(--secondary-light-pink);
+    border-radius: 8px;
+    margin-bottom: 10px;
+    width: 100%;
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+
+  .card p:hover {
+    background-color: var(--secondary-light-pink-hover);
+    transform: translateX(5px);
   }
 
   /* History Section */
@@ -1021,7 +1055,7 @@ svg {
   }
 
   .gallery img {
-    height: 300px; /* Adjust height for smaller screens */
+    height: auto; /* Adjust height for smaller screens */
     width: 100%;
   }
 
@@ -1082,8 +1116,34 @@ svg {
     align-items: center;
   }
   
-  .window-card {
-    width: 250px;
-    height: 350px;
+  /* Hero image container */
+  .rahul-container {
+    height: 70vh;
+    background-attachment: scroll; /* Remove fixed background on mobile */
+  }
+  
+  .hero {
+    height: 70vh;
+  }
+  
+  /* History image */
+  .history-image img {
+    max-width: 100%;
+  }
+}
+
+/* Very small devices */
+@media (max-width: 400px) {
+  .hero h1 {
+    font-size: 2rem;
+  }
+  
+  .services h1, .history-text h1, .booking-info h2 {
+    font-size: 28px;
+  }
+  
+  .btn-primary {
+    padding: 10px 25px;
+    font-size: 14px;
   }
 }
