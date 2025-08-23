@@ -885,7 +885,7 @@ svg {
 
 .footer-col p {
   display: flex;
-  align-items: center;
+  align-items: flex-start; /* Changed from center to flex-start for better alignment */
   font-size: 14px;
   color: var(--secondary-footer-text-color);
   margin-bottom: 12px;
@@ -893,11 +893,12 @@ svg {
 }
 
 .footer-col p svg {
-  flex-shrink: 0; /* Prevent squishing */
+  flex-shrink: 0;
   width: 18px;
   height: 18px;
   margin-right: 15px;
-  fill: var(--primary-soft-rose); /* Adjusted to match the soft-rose variable */
+  margin-top: 3px; /* Added to vertically align with text */
+  fill: var(--primary-soft-rose);
 }
 
 /* Bottom Bar */
@@ -914,6 +915,27 @@ svg {
 }
 
 /* Responsive */
+
+@media (max-width: 900px) {
+  .footer-col p {
+    align-items: center; /* Revert to center on medium screens */
+  }
+}
+
+@media (max-width: 600px) {
+
+  .footer-col p {
+    justify-content: center;
+    text-align: center;
+    flex-direction: column; /* Stack icon and text on very small screens */
+  }
+  
+  .footer-col p svg {
+    margin-right: 0;
+    margin-bottom: 8px;
+    align-self: center; /* Center the icon when stacked */
+  }
+}
 
 @media (max-width: 1285px) {
   .pink-card,
@@ -1107,6 +1129,10 @@ svg {
   }
 
   .footer-col p {
+    justify-content: center;
+  }
+  .footer-col .logo {
+        display: flex;
     justify-content: center;
   }
   
