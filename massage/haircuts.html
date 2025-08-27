@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Avenue Nails & Spa - Haircuts</title>
+  <!-- fonts Cormorant garamond -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+    rel="stylesheet"
+  />
+  <!-- AOS CSS -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <style>
+    /* Global Colors */
+    :root {
+      /* Primary Colors */
+      --primary-soft-rose: #b76e79;
+      --primary-dark-brown: #4a3f35;
+      --primary-white: #fff;
+      --primary-dark-gray: #333;
+
+      /* Secondary Colors */
+      --secondary-light-pink: #f9e0e3;
+      --secondary-light-beige: #f5f0e9;
+      --secondary-off-white: #fffdfa;
+      --secondary-light-gray: #fcfafa;
+      --secondary-medium-gray: #777;
+      --secondary-light-pink-hover: #e5b8c2;
+      --secondary-dark-rose: #b44b67;
+      --secondary-darker-rose: #933a53;
+      --secondary-light-yellow: #e6b800;
+      --secondary-pale-rose: #e495a8;
+      --secondary-light-pink-quote: #f3d6d9;
+      --secondary-soft-pink-stars: #c97a7e;
+      --secondary-pale-beige: #faf6f2;
+      --secondary-light-border: #ddd;
+      --secondary-footer-background: #e9e0d5;
+      --secondary-footer-text-color: #444;
+      --secondary-footer-border: #d2c4b6;
+      --secondary-social-icon-hover: #fae1e4;
+
+      /* Other Colors (not categorized as primary/secondary based on usage) */
+      --neutral-dark: #222;
+      --neutral-medium: #555;
+      --neutral-light: #bbb;
+      --neutral-hover-dark: #a55c67; /* This was #b7757f in original, but changed to #a55c67 in the btn:hover */
+    }
+
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      overflow-x: hidden; /* Prevent horizontal scroll */
+      width: 100%;
+    }
+
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background-color: var(--secondary-off-white);
+      color: var(--primary-dark-gray);
+    }
+
+    /* Navbar */
+    .navbar {
+      height: 100px;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 8%;
+      background: var(--secondary-light-gray);
+      position: absolute;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      line-height: 2rem;
+      font-weight: 300;
+      font-family: Cormorant Garamond, serif;
+      margin-left: 0.25rem;
+      display: flex; /* Make logo a flex container */
+      align-items: center; /* Vertically align items */
+    }
+
+    .logo-icon {
+      height: 30px; /* Adjust size as needed */
+      width: 30px; /* Adjust size as needed */
+      margin-right: 10px; /* Space between icon and text */
+      fill: var(--primary-soft-rose); /* Apply color if it's an SVG */
+    }
+
+    .logo span {
+      color: var(--primary-soft-rose); /* soft rose */
+      font-size: 24px;
+      font-family: "Cormorant Garamond", serif;
+      font-weight: 600;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--primary-dark-gray);
+      font-family: "Inter", sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+    .nav-links a:hover {
+      color: var(--secondary-dark-rose);
+    }
+
+    /* Hamburger Menu */
+    .hamburger-menu {
+      display: none; /* Hidden by default on larger screens */
+      flex-direction: column;
+      justify-content: space-around;
+      width: 30px;
+      height: 25px;
+      cursor: pointer;
+      z-index: 1001; /* Ensure it's above other elements */
+    }
+
+    .hamburger-menu span {
+      display: block;
+      width: 100%;
+      height: 3px;
+      background-color: var(--primary-soft-rose);
+      border-radius: 5px;
+      transition: all 0.3s ease-in-out;
+    }
+
+    /* Hamburger menu animation */
+    .hamburger-menu.open span:nth-child(1) {
+      transform: translateY(11px) rotate(45deg);
+    }
+
+    .hamburger-menu.open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger-menu.open span:nth-child(3) {
+      transform: translateY(-11px) rotate(-45deg);
+    }
+
+    /* Mobile Navigation */
+    .mobile-nav {
+      position: fixed;
+      top: 100px;
+      left: 0;
+      width: 100%;
+      background: var(--secondary-light-gray);
+      padding: 20px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transform: translateY(-100%);
+      opacity: 0;
+      transition: all 0.3s ease;
+      z-index: 999;
+    }
+
+    .mobile-nav.active {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .mobile-nav-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .mobile-nav-links a {
+      text-decoration: none;
+      color: var(--primary-dark-gray);
+      font-family: "Inter", sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      transition: 0.3s;
+      display: block;
+      padding: 10px 0;
+    }
+
+    .mobile-nav-links a:hover {
+      color: var(--secondary-dark-rose);
+    }
+
+    /* ========== Facial Services Section ========== */
+    .facials-section {
+      --fs-bg: #fffdfa;
+      --fs-pink: #f9e0e3;
+      --fs-lavender: #b2a8d1; /* New lavender color for facials */
+      --fs-lavender-dark: #8a7cb6; /* Darker lavender */
+      --fs-brown: #4a3f35;
+      --fs-text: #333;
+      --fs-muted: #777;
+      --fs-card: #ffffff;
+      --fs-shadow: 0 10px 30px rgba(0,0,0,0.06);
+      background: radial-gradient(1200px 600px at 85% 85%, rgba(178,168,209,0.06), transparent 60%),
+                  radial-gradient(900px 500px at 20% 40%, rgba(249,224,227,0.55), transparent 65%),
+                  var(--fs-bg);
+      padding: 100px 6% 120px; /* leaves navbar intact */
+    }
+
+    .facials-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .facials-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .facials-header h2 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 44px;
+      color: var(--fs-brown);
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      margin-bottom: 10px;
+    }
+
+    .facials-header h2 span {
+      color: var(--primary-soft-rose);
+    }
+
+    .facials-header p {
+      margin-top: 8px;
+      font-size: 15px;
+      color: var(--fs-muted);
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .facials-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 1fr;
+      gap: 28px;
+      margin-top: 28px;
+      align-items: start;
+    }
+
+    .facials-image-wrap {
+      background: linear-gradient(180deg, #fff 0%, #f5f0f9 100%);
+      border-radius: 16px;
+      padding: 14px;
+      box-shadow: var(--fs-shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Glass morphed circle decorative elements */
+    .glass-circle {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      z-index: 1;
+    }
+    
+    .glass-circle-1 {
+      width: 130px;
+      height: 130px;
+      top: 180px;
+      left:650px;
+      background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(217, 32, 97, 0.118) 100%);
+    }
+    
+    .glass-circle-2 {
+      width: 120px;
+      height: 120px;
+      bottom: 30px;
+      left: 120px;
+      background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(217, 32, 97, 0.118) 100%);
+    }
+
+    @media (max-width: 1300px) {
+        .glass-circle-1{
+          display: none;
+        }
+        .glass-circle-2{
+          display: none;
+        }
+      }
+
+    .facials-image-wrap img {
+      width: 100%;
+      height: 420px;
+      object-fit: cover;
+      border-radius: 12px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .facials-card-list {
+      background: rgba(255,255,255,0.65);
+      backdrop-filter: blur(4px);
+      border-radius: 16px;
+      box-shadow: var(--fs-shadow);
+      padding: 12px;
+    }
+
+    .facials-card {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      background: var(--fs-card);
+      border-radius: 12px;
+      padding: 16px 18px;
+      margin: 10px 0;
+      border: 1px solid #f1e6e8;
+      transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+    }
+
+    .facials-card:hover {
+      transform: translateY(-2px);
+      border-color: #edd2d8;
+      box-shadow: 0 12px 26px rgba(178,168,209,0.12);
+    }
+
+    .fc-left {
+      display: grid;
+      grid-template-columns: 44px 1fr;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .fc-icon {
+      display: grid;
+      place-items: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      background: var(--secondary-light-pink-quote); /* Lavender tint instead of pink */
+      color: var(--fs-lavender);
+      font-size: 20px;
+    }
+
+    .facials-card h3 {
+      font-family: "Inter", sans-serif;
+      font-weight: 300;
+      font-size: 18px;
+      color: var(--fs-brown);
+      margin-bottom: 2px;
+    }
+
+    .facials-card p {
+      font-size: 13px;
+      color: var(--fs-muted);
+    }
+
+    .fc-right {
+      display: grid;
+      justify-items: end;
+      align-content: center;
+      gap: 2px;
+    }
+
+    .fc-price {
+      color: var(--primary-soft-rose);
+      font-weight: 700;
+      font-size: 18px;
+    }
+
+    .fc-time {
+      font-size: 12px;
+      color: #9a8f85;
+    }
+
+    .facials-note {
+      margin: 12px 6px 6px;
+      font-size: 12.5px;
+      color: #8a7f78;
+      text-align: center;
+    }
+
+    .facials-cta {
+      display: block;
+      margin: 20px auto 10px;
+      background: var(--primary-soft-rose);
+      color: #fff;
+      padding: 12px 22px;
+      border-radius: 22px;
+      text-decoration: none;
+      font-weight: 600;
+      letter-spacing: 0.2px;
+      transition: background .25s ease, transform .15s ease;
+      text-align: center;
+      max-width: 200px;
+    }
+
+    .facials-cta:hover {
+      background: var(--neutral-hover-dark);
+      transform: translateY(-1px);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      .facials-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      
+      .facials-image-wrap img {
+        height: 360px;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .navbar {
+        padding: 18px 5%;
+        height: 100px;
+      }
+      
+      .nav-links {
+        display: none;
+      }
+      
+      .hamburger-menu {
+        display: flex;
+      }
+      
+      .facials-section {
+        padding: 80px 5% 80px;
+      }
+      
+      .facials-header h2 {
+        font-size: 36px;
+      }
+      
+      .facials-header p {
+        font-size: 14px;
+        padding: 0 10px;
+      }
+      
+      .facials-card {
+        padding: 14px;
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+      
+      .fc-left {
+        grid-template-columns: 40px 1fr;
+        gap: 10px;
+      }
+      
+      .fc-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+      }
+      
+      .facials-card h3 {
+        font-size: 16px;
+      }
+      
+      .facials-card p {
+        font-size: 12px;
+      }
+      
+      .fc-right {
+        justify-items: start;
+        margin-top: 5px;
+      }
+      
+      .fc-price {
+        font-size: 16px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .logo {
+        font-size: 1.2rem;
+      }
+      
+      .logo-icon {
+        height: 25px;
+        width: 25px;
+      }
+      
+      .logo span {
+        font-size: 20px;
+      }
+      
+      .facials-section {
+        padding: 70px 4% 70px;
+      }
+      
+      .facials-header h2 {
+        font-size: 32px;
+      }
+      
+      .facials-image-wrap {
+        padding: 10px;
+      }
+      
+      .facials-image-wrap img {
+        height: 280px;
+      }
+      
+      .facials-card-list {
+        padding: 10px;
+      }
+      
+      .facials-card {
+        padding: 12px;
+      }
+      
+      .fc-left {
+        grid-template-columns: 36px 1fr;
+      }
+      
+      .fc-icon {
+        width: 36px;
+        height: 36px;
+        font-size: 16px;
+      }
+      
+      .facials-card h3 {
+        font-size: 15px;
+      }
+      
+      .facials-note {
+        font-size: 12px;
+      }
+      
+      .facials-cta {
+        padding: 10px 18px;
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="logo">
+        <img
+          src="spa-solid-full (1)pink.png"
+          alt="Nail Polish Icon"
+          class="logo-icon"
+        />
+        <span>Avenue Nails &</span> Spa
+      </div>
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#our-story">Our Story</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#booking">Contact</a></li>
+      </ul>
+      
+      <div class="hamburger-menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </nav>
+    
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav">
+      <ul class="mobile-nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#our-story">Our Story</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#booking">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Facial Services Section -->
+  <section class="facials-section" id="facials">
+    <div class="facials-container">
+      <div class="facials-header">
+        <h2>Hair <span>Cuts</span></h2>
+        <p>Experience precision cuts tailored to enhance your natural beauty and style.</p>
+      </div>
+
+      <div class="facials-grid">
+        <!-- Left: Room image with decorative glass circles -->
+         <div class="glass-circle glass-circle-1"></div>
+          <div class="glass-circle glass-circle-2"></div>
+        <figure class="facials-image-wrap" aria-label="Facial treatment room">
+          
+          <img
+            src="https://ucarecdn.com/04dada4a-804b-45e2-a7c3-bf1d2a4f09ba/-/preview/640x480/"
+            alt="Haircut session"
+          />
+        </figure>
+
+        <!-- Right: Services list -->
+        <div class="facials-card-list">
+          <article class="facials-card">
+            <div class="fc-left">
+              <span class="fc-icon">✨</span>
+              <div>
+                <h3>Women Haircut</h3>
+                <p>Custom cut and style for women.</p>
+              </div>
+            </div>
+            <div class="fc-right">
+              <strong class="fc-price">€45</strong>
+              <span class="fc-time"></span>
+            </div>
+          </article>
+
+          <article class="facials-card">
+            <div class="fc-left">
+              <span class="fc-icon">💎</span>
+              <div>
+                <h3>Men Haircut</h3>
+                <p>Precision cut tailored for men.</p>
+              </div>
+            </div>
+            <div class="fc-right">
+              <strong class="fc-price">
+€25</strong>
+              <span class="fc-time"></span>
+            </div>
+          </article>
+
+          <article class="facials-card">
+            <div class="fc-left">
+              <span class="fc-icon">🌿</span>
+              <div>
+                <h3>Children Haircut</h3>
+                <p>Fun, age-appropriate cuts for kids.
+</p>
+              </div>
+            </div>
+            <div class="fc-right">
+              <strong class="fc-price">€20</strong>
+              <span class="fc-time"></span>
+            </div>
+          </article>
+
+
+          <p class="facials-note">All treatments include a complimentary consultation and skincare recommendations.</p>
+
+          <a href="#book" class="facials-cta">Book Your Haircut</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <script>
+    // Mobile menu toggle functionality
+    const hamburgerMenu = document.querySelector('.hamburger-menu');
+    const mobileNav = document.querySelector('.mobile-nav');
+    
+    hamburgerMenu.addEventListener('click', function() {
+      this.classList.toggle('open');
+      mobileNav.classList.toggle('active');
+      
+      // Prevent body scrolling when menu is open
+      document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
+    });
+    
+    // Close menu when clicking on a link
+    const mobileLinks = document.querySelectorAll('.mobile-nav-links a');
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        hamburgerMenu.classList.remove('open');
+        mobileNav.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    });
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!hamburgerMenu.contains(e.target) && !mobileNav.contains(e.target) && mobileNav.classList.contains('active')) {
+        hamburgerMenu.classList.remove('open');
+        mobileNav.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+  </script>
+</body>
+</html>
