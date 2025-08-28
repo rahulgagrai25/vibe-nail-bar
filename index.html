@@ -14,6 +14,42 @@
     <link rel="stylesheet" href="style.css" />
     <!-- AOS CSS -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <!-- Tailwind CSS for React Component -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              "primary-soft-rose": "#b76e79",
+              "primary-dark-brown": "#4a3f35",
+              "primary-white": "#fff",
+              "primary-dark-gray": "#333",
+              "secondary-light-pink": "#f9e0e3",
+              "secondary-light-beige": "#f5f0e9",
+              "secondary-off-white": "#fffdfa",
+              "secondary-light-pink-hover": "#e5b8c2",
+              "secondary-dark-rose": "#b44b67",
+              "secondary-darker-rose": "#933a53",
+              "secondary-pale-rose": "#e495a8",
+            },
+            fontFamily: {
+              cormorant: ['"Cormorant Garamond"', "serif"],
+              inter: ['"Inter"', "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <script type="importmap">
+      {
+        "imports": {
+          "react": "https://aistudiocdn.com/react@^19.1.1",
+          "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/",
+          "react/": "https://aistudiocdn.com/react@^19.1.1/"
+        }
+      }
+    </script>
   </head>
   <body>
     <!-- Navbar -->
@@ -68,40 +104,9 @@
         </p>
       </div>
 
-      <!-- Services Grid -->
-      <div class="services-grid">
-        <!-- Card 1 -->
-        <div class="card" data-aos="fade-up" data-aos-delay="100">
-          <a href="./pages/facial.html"><img class="window-card" src="cards/facial c.png" alt="" ></a>
-          <p>Facials</p>
-        </div>
+      <!-- Container for the React component -->
 
-        <div class="card" data-aos="fade-up" data-aos-delay="200">
-          <a href="./pages/bodytreatment.html"><img class="window-card" src="cards/body treatment c.png" alt="" ></a>
-          <p>Body Treatment</p>
-        </div>
-
-        <div class="card" data-aos="fade-up" data-aos-delay="300">
-          <a href="./pages/waxing.html"><img class="window-card" src="cards/waxing c.png" alt="" ></a>
-          <p>Waxing</p>
-        </div>
-
-        <div class="card" data-aos="fade-up" data-aos-delay="400">
-          <a href="./pages/lashes.html"><img class="window-card" src="cards/lashes c.png" alt="" ></a>
-          <p>Lashes & Eyebrows</p>
-        </div>
-
-       <div class="card" data-aos="fade-up" data-aos-delay="500">
-          <a href="./pages/pedicures.html"><img class="window-card" src="cards/pedicure c.png" alt="" ></a>
-          <p>Pedicure</p>
-        </div>
-
-        <div class="card" data-aos="fade-up" data-aos-delay="600">
-          <a href="./pages/wigs.html"><img class="window-card" src="cards/wig c.png" alt="" ></a>
-          <p>Wigs</p>
-        </div>
-
-      </div>
+      <div class="services-container" id="services-container"></div>
 
       <!-- View More -->
       <div class="view-more" data-aos="fade-up" data-aos-duration="1000">
@@ -120,9 +125,9 @@
         >
           <h1>Our Story of <span>Excellence</span></h1>
           <p>
-            Founded in 2020, Avenue Nails & Spa began with a simple vision: to create
-            a sanctuary where guests could escape the demands of everyday life
-            and reconnect with their inner selves.
+            Founded in 2020, Avenue Nails & Spa began with a simple vision: to
+            create a sanctuary where guests could escape the demands of everyday
+            life and reconnect with their inner selves.
           </p>
           <p>
             Over the years, we have refined our approach to wellness, combining
@@ -446,7 +451,11 @@
           >
             <h3>Schedule Your Visit</h3>
             <form action="https://api.web3forms.com/submit" method="post">
-              <input type="hidden" name="access_key" value="ad0e8616-cce1-4d8e-b280-00d3ab76ae17" />
+              <input
+                type="hidden"
+                name="access_key"
+                value="ad0e8616-cce1-4d8e-b280-00d3ab76ae17"
+              />
 
               <input
                 type="text"
@@ -741,6 +750,206 @@
         <p>© 2023 Avenue Nails & Spa. All rights reserved.</p>
       </div>
     </footer>
+
+    <!-- React Scripts -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- React Component for Services Section -->
+
+    <script type="text/babel">
+      const { useState, useRef, useCallback } = React;
+
+      const servicesData = [
+        { title: "Facials", imageUrl: "cards/facial c.png" },
+        { title: "Body Treatment", imageUrl: "cards/body treatment c.png" },
+        { title: "Waxing", imageUrl: "cards/waxing c.png" },
+        { title: "Lashes & Eyebrows", imageUrl: "cards/lashes c.png" },
+        { title: "Pedicure", imageUrl: "cards/pedicure c.png" },
+        { title: "Wigs", imageUrl: "cards/wig c.png" },
+      ];
+
+      const ServiceCard = ({ service }) => (
+        <div className="service-card">
+          <div className="avatar image-wrap">
+            <img
+              src={service.imageUrl}
+              alt={service.title}
+              className="w-full h-full object-cover"
+            />
+          </div>
+          <p className="title">{service.title}</p>
+        </div>
+      );
+
+      const ServicesGrid = () => {
+        const [currentIndex, setCurrentIndex] = useState(1);
+        const dragStartX = useRef(0);
+        const containerRef = useRef(null);
+        const isDragging = useRef(false);
+
+        const handleDragStart = useCallback((x) => {
+          isDragging.current = true;
+          dragStartX.current = x;
+          if (containerRef.current) {
+            containerRef.current.style.transition = "none";
+            containerRef.current.style.cursor = "grabbing";
+          }
+        }, []);
+
+        const handleDragMove = useCallback((x) => {
+          if (!isDragging.current || !containerRef.current) return;
+          const diff = dragStartX.current - x;
+          containerRef.current.style.transform = `translateX(${-diff}px)`;
+        }, []);
+
+        const handleDragEnd = useCallback((x) => {
+          if (!isDragging.current) return;
+          isDragging.current = false;
+
+          if (containerRef.current) {
+            containerRef.current.style.transition = "transform 0.2s ease-out";
+            containerRef.current.style.transform = "translateX(0)";
+            containerRef.current.style.cursor = "grab";
+          }
+
+          const threshold = 50;
+          const moved = dragStartX.current - x;
+
+          if (moved > threshold) {
+            setCurrentIndex(
+              (prevIndex) => (prevIndex + 1) % servicesData.length
+            );
+          } else if (moved < -threshold) {
+            setCurrentIndex(
+              (prevIndex) =>
+                (prevIndex - 1 + servicesData.length) % servicesData.length
+            );
+          }
+        }, []);
+
+        const handleTouchStart = useCallback(
+          (e) => handleDragStart(e.targetTouches[0].clientX),
+          [handleDragStart]
+        );
+        const handleTouchMove = useCallback(
+          (e) => handleDragMove(e.targetTouches[0].clientX),
+          [handleDragMove]
+        );
+        const handleTouchEnd = useCallback(
+          (e) => handleDragEnd(e.changedTouches[0].clientX),
+          [handleDragEnd]
+        );
+        const handleMouseDown = useCallback(
+          (e) => {
+            e.preventDefault();
+            handleDragStart(e.clientX);
+          },
+          [handleDragStart]
+        );
+        const handleMouseMove = useCallback(
+          (e) => handleDragMove(e.clientX),
+          [handleDragMove]
+        );
+        const handleMouseUp = useCallback(
+          (e) => handleDragEnd(e.clientX),
+          [handleDragEnd]
+        );
+        const handleMouseLeave = useCallback(
+          (e) => {
+            if (isDragging.current) {
+              handleDragEnd(e.clientX);
+            }
+          },
+          [handleDragEnd]
+        );
+
+        const getCardStyle = (index) => {
+          const totalItems = servicesData.length;
+          let offset = index - currentIndex;
+          if (offset > totalItems / 2) offset -= totalItems;
+          else if (offset < -totalItems / 2) offset += totalItems;
+
+          const isVisible = Math.abs(offset) <= 1;
+          const baseCenter = "translate(-50%, -50%)";
+
+          if (!isVisible) {
+            return {
+              transform: `${baseCenter} translateX(${
+                offset > 0 ? 150 : -150
+              }%) scale(0.5)`,
+              opacity: 0,
+              zIndex: -1,
+              visibility: "hidden",
+              transition:
+                "transform 0.5s ease-out, opacity 0.5s ease-out, visibility 0.5s",
+            };
+          }
+
+          const scale = offset === 0 ? "scale(1)" : "scale(0.75)";
+          const opacity = offset === 0 ? 1 : 0.4;
+          const zIndex = offset === 0 ? 10 : 0;
+          const translateX =
+            offset === 0 ? "translateX(0)" : `translateX(${offset * 70}%)`;
+
+          return {
+            transform: `${baseCenter} ${translateX} ${scale}`,
+            opacity,
+            zIndex,
+            transition: "transform 0.5s ease-out, opacity 0.5s ease-out",
+            visibility: "visible",
+          };
+        };
+
+        return (
+          <React.Fragment>
+            {/* Mobile Carousel View */}
+            <div
+              className="md:hidden relative h-[400px] flex items-center justify-center cursor-grab select-none"
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleTouchEnd}
+              onMouseDown={handleMouseDown}
+              onMouseMove={handleMouseMove}
+              onMouseUp={handleMouseUp}
+              onMouseLeave={handleMouseLeave}
+            >
+              <div
+                ref={containerRef}
+                className="relative w-full h-full overflow-hidden"
+              >
+                {servicesData.map((service, idx) => (
+                  <div
+                    key={idx}
+                    className="absolute w-[200px] h-[350px] top-1/2 left-1/2"
+                    style={getCardStyle(idx)}
+                  >
+                    <ServiceCard service={service} />
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Desktop Grid View - Updated to show all 6 in a row */}
+            <div className="hidden md:flex justify-center items-center w-full gap-4 px-8">
+              {servicesData.map((service, index) => (
+                <div
+                  key={index}
+                  className="flex-1 min-w-[150px] max-w-[200px] transition-transform duration-300 hover:scale-105"
+                >
+                  <ServiceCard service={service} />
+                </div>
+              ))}
+            </div>
+          </React.Fragment>
+        );
+      };
+
+      const domContainer = document.querySelector("#services-container");
+      const root = ReactDOM.createRoot(domContainer);
+      root.render(<ServicesGrid />);
+    </script>
 
     <script src="app.js"></script>
     <!-- AOS JS -->

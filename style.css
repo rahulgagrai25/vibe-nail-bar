@@ -40,7 +40,8 @@
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   overflow-x: hidden; /* Prevent horizontal scroll */
   width: 100%;
 }
@@ -227,11 +228,14 @@ body {
   background: var(--secondary-light-beige);
   text-align: center;
   overflow: hidden;
-  background-image: 
-                radial-gradient(circle, rgba(200, 167, 150, 0.2) 2px, transparent 2px),
-                radial-gradient(circle, rgba(200, 167, 150, 0.1) 1px, transparent 1px);
-            background-size: 40px 40px, 80px 80px;
-            background-position: 0 0, 40px 40px;
+  background-image: radial-gradient(
+      circle,
+      rgba(200, 167, 150, 0.2) 2px,
+      transparent 2px
+    ),
+    radial-gradient(circle, rgba(200, 167, 150, 0.1) 1px, transparent 1px);
+  background-size: 40px 40px, 80px 80px;
+  background-position: 0 0, 40px 40px;
 }
 
 .services h1 {
@@ -252,37 +256,6 @@ body {
   margin-bottom: 50px;
   line-height: 1.5rem;
 }
-
-/* Grid */
-.services-grid {
-  width: 100%;
-  height: auto;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 30px;
-  padding: 0rem 2rem;
-}
-
-.card p{
-  font-family: Cormorant Garamond, serif;
-  font-size: 20px;
-  font-weight: 500;
-  font-style: italic;
-}
-
-.window-card {
-  width: 200px;
-  height: 300px;
-  margin-bottom: 15px;
-  transition: 0.3s;
-}
-
-.window-card:hover {
-  transform: scale(1.05);
-  filter: drop-shadow(0 0 0.75rem var(--secondary-social-icon-hover));
-}
-
 
 /* View More Button */
 .view-more {
@@ -401,7 +374,7 @@ body {
   height: auto;
 }
 
-.pink-card {
+/* .pink-card {
   position: absolute;
   height: 300px;
   width: 300px;
@@ -420,7 +393,7 @@ body {
   border-radius: 15px;
 
   background-color: var(--secondary-light-pink);
-}
+} */
 
 /* testimonial section */
 .testimonial {
@@ -639,11 +612,14 @@ body {
   width: auto;
   padding: 60px 20px;
   background: var(--primary-white);
-  background-image: 
-                radial-gradient(circle, rgba(200, 167, 150, 0.1) 2px, transparent 2px),
-                radial-gradient(circle, rgba(200, 167, 150, 0.1) 1px, transparent 1px);
-            background-size: 40px 40px, 80px 80px;
-            background-position: 0 0, 40px 40px;
+  background-image: radial-gradient(
+      circle,
+      rgba(200, 167, 150, 0.1) 2px,
+      transparent 2px
+    ),
+    radial-gradient(circle, rgba(200, 167, 150, 0.1) 1px, transparent 1px);
+  background-size: 40px 40px, 80px 80px;
+  background-position: 0 0, 40px 40px;
 }
 
 .booking-wrapper {
@@ -923,13 +899,12 @@ svg {
 }
 
 @media (max-width: 600px) {
-
   .footer-col p {
     justify-content: center;
     text-align: center;
     flex-direction: column; /* Stack icon and text on very small screens */
   }
-  
+
   .footer-col p svg {
     margin-right: 0;
     margin-bottom: 8px;
@@ -953,11 +928,12 @@ svg {
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
   /* Prevent horizontal scroll */
-  html, body {
+  html,
+  body {
     overflow-x: hidden;
     width: 100%;
   }
-  
+
   /* Navbar */
   .navbar {
     padding: 18px 5%;
@@ -1017,33 +993,6 @@ svg {
   /* Services Section - Fixed for mobile */
   .services {
     padding: 40px 5%;
-  }
-
-  .services-grid {
-    flex-direction: column;
-    align-items: center;
-    padding: 0;
-  }
-
-  .window-card {
-    display: none; /* Hide window cards on mobile */
-  }
-
-  .card p {
-    display: block; /* Show only service names */
-    font-size: 18px;
-    padding: 12px 20px;
-    background-color: var(--secondary-light-pink);
-    border-radius: 8px;
-    margin-bottom: 10px;
-    width: 100%;
-    text-align: center;
-    transition: all 0.3s ease;
-  }
-
-  .card p:hover {
-    background-color: var(--secondary-light-pink-hover);
-    transform: translateX(5px);
   }
 
   /* History Section */
@@ -1132,26 +1081,26 @@ svg {
     justify-content: center;
   }
   .footer-col .logo {
-        display: flex;
+    display: flex;
     justify-content: center;
   }
-  
+
   /* Services Section Adjustments */
   .services-grid {
     flex-direction: column;
     align-items: center;
   }
-  
+
   /* Hero image container */
   .rahul-container {
     height: 70vh;
     background-attachment: scroll; /* Remove fixed background on mobile */
   }
-  
+
   .hero {
     height: 70vh;
   }
-  
+
   /* History image */
   .history-image img {
     max-width: 100%;
@@ -1163,11 +1112,13 @@ svg {
   .hero h1 {
     font-size: 2rem;
   }
-  
-  .services h1, .history-text h1, .booking-info h2 {
+
+  .services h1,
+  .history-text h1,
+  .booking-info h2 {
     font-size: 28px;
   }
-  
+
   .btn-primary {
     padding: 10px 25px;
     font-size: 14px;
