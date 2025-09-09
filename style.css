@@ -77,8 +77,8 @@ body {
 }
 
 .logo-icon {
-  height: 30px; /* Adjust size as needed */
-  width: 30px; /* Adjust size as needed */
+  height: 60px;  /* Adjust size as needed */
+  width: 60px; /* Adjust size as needed */
   margin-right: 10px; /* Space between icon and text */
   fill: var(--primary-soft-rose); /* Apply color if it's an SVG */
 }
@@ -167,7 +167,7 @@ body {
 .rahul-container {
   position: relative;
   height: 95vh;
-  background-image: url("icons/main.png");
+  background-image: url("icons/main2.png");
   /* background link if not available-  https://storage.googleapis.com/uxpilot-auth.appspot.com/a06f31e04c-5e2b2366b2186d3ff4ef.png */
   background-position: center;
   background-size: cover;
